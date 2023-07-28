@@ -1,9 +1,9 @@
 #!/bin/bash
 
-PORT=9081 node frontend/build & front_pid=$! &
-PORT=9080 ./backend/build/clipsearch_api_server -c backend/config.json & back_pid=$! &
+trap 'trap " " SIGTERM; kill 0; wait;' SIGINT SIGTERM
 
-wait $back_pid && wait $front_pid
+PORT=9081 node frontend/build &
+PORT=9080 ./backend/clipsearch
 
 
 
